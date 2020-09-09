@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add</title>
+    <link th:href="@{homeStyles.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+
+            <a class="navbar-brand" href="#"><img th:src="@{/images/mainLogo-md.png}"></a>
+
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">My Subscriptions</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Add</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Delete</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Manage Accounts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Notifications</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sign Out</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="options">
+        <form>
+            <label>Select Billing Cycle:
+                <select th:field="${billingCycle}">
+                    <option th:each="cycle : ${billingCycle}" th:value="*{cycle}" th:text="*{cycle}">
+                    </option>
+                </select>
+            </label> <br/>
+            <label>Select Media Type:
+                <select th:field="${mediaTypes}">
+                    <option th:each="type : ${mediaTypes}" th:value="*{type}" th:text="*{type}">
+                    </option>
+                </select>
+            </label>
+        </form>
+    </div>
+
+    <footer>
+        Copyright &copy;2020 <br/>
+        Jorge Garcia <br/>
+        CS-321-1
+    </footer>
+</body>
+</html>
