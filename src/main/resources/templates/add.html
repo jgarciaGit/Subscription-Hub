@@ -44,20 +44,51 @@
         </nav>
     </header>
 
-    <div class="options">
-        <form>
+    <div class="info">
+        <form method="post" th:object="${subscription}">
+            <label>Name of subscription:
+                <input type="text" th:field="*{name}">
+                <span class="validationError"
+                    th:if="${#fields.hasErrors('name')}"
+                    th:errors="*{name}">Name Error</span>
+            </label> <br/>
+            <label>Cost of subscription:
+                <input type="number" th:step="0.01" th:field="*{cost}">
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('cost')}"
+                      th:errors="*{cost}">Cost Error</span>
+            </label> <br/>
+            <label>Current billing cycle start date:
+                <input type="date" th:field="*{start}">
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('start')}"
+                      th:errors="*{start}">Date Error</span>
+            </label> <br/>
+            <label>Current billing cycle end date:
+                <input type="date" th:max="2021-12-31" th:min="2019-9-15" th:field="*{end}">
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('end')}"
+                      th:errors="*{end}">Date Error</span>
+            </label> <br/>
             <label>Select Billing Cycle:
-                <select th:field="${billingCycle}">
-                    <option th:each="cycle : ${billingCycle}" th:value="*{cycle}" th:text="*{cycle}">
+                <select th:field="*{billingCycle}">
+                    <option th:each="cycle : ${billingCycle}" th:value="${cycle}" th:text="${cycle}">
                     </option>
                 </select>
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('billingCycle')}"
+                      th:errors="*{billingCycle}">Cycle Error</span>
             </label> <br/>
             <label>Select Media Type:
-                <select th:field="${mediaTypes}">
-                    <option th:each="type : ${mediaTypes}" th:value="*{type}" th:text="*{type}">
+                <select th:field="*{mediaTypes}">
+                    <option th:each="type : ${mediaTypes}" th:value="${type}" th:text="${type}">
                     </option>
                 </select>
-            </label>
+                    <span class="validationError"
+                          th:if="${#fields.hasErrors('mediaTypes')}"
+                          th:errors="*{mediaTypes}">Media Error</span>
+            </label> <br/>
+            <input type="submit" value="Submit Form"/>
         </form>
     </div>
 

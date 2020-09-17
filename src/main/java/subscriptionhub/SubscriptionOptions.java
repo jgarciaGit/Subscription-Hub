@@ -13,7 +13,7 @@ public class SubscriptionOptions {
     }
 
     public static enum MediaType {
-        PRINT, BROADCAST, INTERNET;
+         PRINT, BROADCAST, INTERNET;
     }
 
 //    public static enum MediaType {
