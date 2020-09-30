@@ -17,7 +17,7 @@
 
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">My Subscriptions</a>
+                    <a class="nav-link" th:href="@{mysubscriptions}">My Subscriptions</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Add</a>
@@ -44,55 +44,85 @@
         </nav>
     </header>
 
-    <div class="info">
         <form method="post" th:object="${subscription}">
-            <label>Name of subscription:
-                <input type="text" th:field="*{name}">
+
+            <h1 class="addHead">Add a subscription</h1>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Name of subscription:</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" placeholder="Enter name..." th:field="*{name}">
+                </div>
                 <span class="validationError"
-                    th:if="${#fields.hasErrors('name')}"
-                    th:errors="*{name}">Name Error</span>
-            </label> <br/>
-            <label>Cost of subscription:
-                <input type="number" th:step="0.01" th:field="*{cost}">
+                      th:if="${#fields.hasErrors('name')}"
+                      th:errors="*{name}">Name Error</span>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Cost of subscription:</label>
+                <div class="col-sm-2">
+                    <input type="number" class="form-control" placeholder="Enter cost..." th:step="0.01" th:field="*{cost}">
+                </div>
                 <span class="validationError"
                       th:if="${#fields.hasErrors('cost')}"
                       th:errors="*{cost}">Cost Error</span>
-            </label> <br/>
-            <label>Current billing cycle start date:
-                <input type="date" th:field="*{start}">
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Current billing cycle start date:</label>
+                <div class="col-sm-2">
+                    <input type="date" class="form-control" th:field="*{start}">
+                </div>
                 <span class="validationError"
                       th:if="${#fields.hasErrors('start')}"
                       th:errors="*{start}">Date Error</span>
-            </label> <br/>
-            <label>Current billing cycle end date:
-                <input type="date" th:max="2021-12-31" th:min="2019-9-15" th:field="*{end}">
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Current billing cycle end date:</label>
+                <div class="col-sm-2">
+                <input type="date" class="form-control" th:max="2021-12-31" th:min="2019-9-15" th:field="*{end}">
+                </div>
                 <span class="validationError"
                       th:if="${#fields.hasErrors('end')}"
                       th:errors="*{end}">Date Error</span>
-            </label> <br/>
-            <label>Select Billing Cycle:
-                <select th:field="*{billingCycle}">
-                    <option th:each="cycle : ${billingCycle}" th:value="${cycle}" th:text="${cycle}">
-                    </option>
-                </select>
-                <span class="validationError"
-                      th:if="${#fields.hasErrors('billingCycle')}"
-                      th:errors="*{billingCycle}">Cycle Error</span>
-            </label> <br/>
-            <label>Select Media Type:
-                <select th:field="*{mediaTypes}">
-                    <option th:each="type : ${mediaTypes}" th:value="${type}" th:text="${type}">
-                    </option>
-                </select>
-                    <span class="validationError"
-                          th:if="${#fields.hasErrors('mediaTypes')}"
-                          th:errors="*{mediaTypes}">Media Error</span>
-            </label> <br/>
-            <input type="submit" value="Submit Form"/>
-        </form>
-    </div>
+            </div>
 
-    <footer>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Select Billing Cycle:</label>
+                <div class="col-sm-2">
+                    <select  class="form-control" th:field="*{options.billingCycle}">
+                        <option th:each="cycle : ${billingCycle}" th:value="${cycle}" th:text="${cycle}">
+                        </option>
+                    </select>
+                </div>
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('options.billingCycle')}"
+                      th:errors="*{options.billingCycle}">Cycle Error</span>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Select Media Type:</label>
+                <div class="col-sm-2">
+                    <select class="form-control" th:field="*{options.mediaType}">
+                        <option th:each="type : ${mediaTypes}" th:value="${type}" th:text="${type}">
+                        </option>
+                    </select>
+                </div>
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('options.mediaType')}"
+                      th:errors="*{options.mediaType}">Media Error</span>
+            </div>
+
+            <div class="form-group row subBtn">
+                <div class="col-sm-2">
+                    <button type="submit" class="btn btn-dark">Submit</button>
+                </div>
+            </div>
+        </form>
+
+
+    <footer class="bttm">
         Copyright &copy;2020 <br/>
         Jorge Garcia <br/>
         CS-321-1

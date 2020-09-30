@@ -4,7 +4,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>My Subscriptions</title>
+    <title>Success</title>
     <link th:href="@{homeStyles.css}" rel="stylesheet"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
@@ -16,10 +16,10 @@
         <a class="navbar-brand" href="#"><img th:src="@{/images/mainLogo-md.png}"></a>
 
         <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">My Subscriptions</a>
-            </li>
             <li class="nav-item">
+                <a class="nav-link" th:href="@{mysubscriptions}">My Subscriptions</a>
+            </li>
+            <li class="nav-item active">
                 <a class="nav-link" th:href="@{add}">Add</a>
             </li>
             <li class="nav-item">
@@ -44,24 +44,9 @@
     </nav>
 </header>
 
-    <h1 class="msHead">Current Subscriptions</h1>
+    <h1>Thank you for your submission</h1>
 
-    <div class="content">
-    <div th:each="subscription : ${subscriptions}">
-        <div class="subBox left">
-            <h3 class="subName" th:text="${subscription.name}">NAME</h3>
-            <hr>
-            <p>Cost: $<span class="subSpan" th:text="${subscription.cost}">Cost</span></p>
-            <p>Start Date: <span class="subSpan" th:text="${subscription.start}">START DATE</span></p>
-            <p>End Date: <span class="subSpan" th:text="${subscription.end}">END DATE</span></p>
-            <p>Billing Cycle: <span class="subSpan" th:text="${subscription.options.billingCycle}"> </span></p>
-            <p>Media Type: <span class="subSpan" th:text="${subscription.options.mediaType}"> </span></p>
-        </div>
-    </div>
-    </div>
-
-
-<footer>
+<footer class="bttm">
     Copyright &copy;2020 <br/>
     Jorge Garcia <br/>
     CS-321-1
