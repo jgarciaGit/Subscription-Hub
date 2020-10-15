@@ -41,9 +41,9 @@ public class AddController {
         if (errors.hasErrors())
             return "add";
 
+
         optionsRepo.save(subscription.getOptions());
         subscriptionRepo.save(subscription);
-
         return "redirect:/success";
     }
 

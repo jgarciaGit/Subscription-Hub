@@ -49,8 +49,8 @@
             <h1 class="addHead">Add a subscription</h1>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Name of subscription:</label>
-                <div class="col-sm-2">
+                <label class="col-sm-4 col-form-label">Name of subscription:</label>
+                <div class="col-sm-4">
                     <input type="text" class="form-control" placeholder="Enter name..." th:field="*{name}">
                 </div>
                 <span class="validationError"
@@ -59,8 +59,8 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Cost of subscription:</label>
-                <div class="col-sm-2">
+                <label class="col-sm-4 col-form-label">Cost of subscription:</label>
+                <div class="col-sm-4">
                     <input type="number" class="form-control" placeholder="Enter cost..." th:step="0.01" th:field="*{cost}">
                 </div>
                 <span class="validationError"
@@ -69,8 +69,8 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Current billing cycle start date:</label>
-                <div class="col-sm-2">
+                <label class="col-sm-4 col-form-label">Current billing cycle start date:</label>
+                <div class="col-sm-4">
                     <input type="date" class="form-control" th:field="*{start}">
                 </div>
                 <span class="validationError"
@@ -79,8 +79,8 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Current billing cycle end date:</label>
-                <div class="col-sm-2">
+                <label class="col-sm-4 col-form-label">Current billing cycle end date:</label>
+                <div class="col-sm-4">
                 <input type="date" class="form-control" th:max="2021-12-31" th:min="2019-9-15" th:field="*{end}">
                 </div>
                 <span class="validationError"
@@ -89,8 +89,8 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Select Billing Cycle:</label>
-                <div class="col-sm-2">
+                <label class="col-sm-4 col-form-label">Select Billing Cycle:</label>
+                <div class="col-sm-4">
                     <select  class="form-control" th:field="*{options.billingCycle}">
                         <option th:each="cycle : ${billingCycle}" th:value="${cycle}" th:text="${cycle}">
                         </option>
@@ -102,8 +102,8 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Select Media Type:</label>
-                <div class="col-sm-2">
+                <label class="col-sm-4 col-form-label">Select Media Type:</label>
+                <div class="col-sm-4">
                     <select class="form-control" th:field="*{options.mediaType}">
                         <option th:each="type : ${mediaTypes}" th:value="${type}" th:text="${type}">
                         </option>
@@ -115,7 +115,7 @@
             </div>
 
             <div class="form-group row subBtn">
-                <div class="col-sm-2">
+                <div class="col-sm-4">
                     <button type="submit" class="btn btn-dark">Submit</button>
                 </div>
             </div>

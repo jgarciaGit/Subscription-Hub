@@ -51,7 +51,7 @@
         <div class="subBox left">
             <h3 class="subName" th:text="${subscription.name}">NAME</h3>
             <hr>
-            <p>Cost: $<span class="subSpan" th:text="${subscription.cost}">Cost</span></p>
+            <p>Cost: $<span class="subSpan" th:text="${subscription.name}">Cost</span></p>
             <p>Start Date: <span class="subSpan" th:text="${subscription.start}">START DATE</span></p>
             <p>End Date: <span class="subSpan" th:text="${subscription.end}">END DATE</span></p>
             <p>Billing Cycle: <span class="subSpan" th:text="${subscription.options.billingCycle}"> </span></p>
