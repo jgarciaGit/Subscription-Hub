@@ -36,12 +36,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/add","/mysubscriptions", "/success")
+                    .antMatchers("add","/mysubscriptions", "/success")
                     .hasRole("USER")
                     .and()
                 .authorizeRequests()
                     .antMatchers("/", "/h2-console/**")
-                    .permitAll();
+                    .permitAll()
+                .and()
+                    .formLogin().loginPage("/login").defaultSuccessUrl("/mysubscriptions")
+                .and()
+                    .logout().logoutSuccessUrl("/");
+
+
         http.csrf().disable();
         http.headers().frameOptions().disable();
     }

@@ -9,15 +9,16 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="gradient">
+<div id="page-container">
     <header>
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
 
-            <a class="navbar-brand" href="#"><img th:src="@{images/mainLogo-md.png}"></a>
+            <a class="navbar-brand"><img th:src="@{images/mainLogo-md.png}"></a>
 
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link home-nav active" href="#">Home</a>
+                    <a class="nav-link home-nav active" th:href="@{/}">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link home-nav" href="#">About</a>
@@ -29,21 +30,41 @@
 
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link home-nav" href="#">Sign Up</a>
+                    <a class="nav-link home-nav" th:href="@{/register}">Sign Up</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link home-nav" href="#">Login</a>
+                    <a class="nav-link home-nav" th:href="@{/login}">Login</a>
                 </li>
             </ul>
         </nav>
     </header>
 
-    <img  class="main" th:src="@{images/subs.png}"/>
+
+    <div id="content-wrap">
+        <div class="icons">
+                <img th:src="@{/images/Netflix_icon.png}" class="subIcons">
+                <img th:src="@{/images/Hulu_icon.png}" class="subIcons">
+                <img th:src="@{/images/Spotify_icon.png}" class="subIcons">
+                <img th:src="@{/images/Disney_icon.png}" class="subIcons_last">
+        </div>
+        <div>
+            <p class="main_par">All Your Subscriptions.<br>
+            All in One Place.</p>
+        </div>
+        <div class="main_reward">
+            <p>
+                #1 Highest Rated on G2<br>
+                <img class="reward" th:src="@{/images/reward.svg}">
+            </p>
+        </div>
+    </div>
+
 
     <footer class="bttm">
         Copyright &copy;2020 <br/>
         Jorge Garcia <br/>
         CS-321-1
     </footer>
+</div>
 </body>
 </html>

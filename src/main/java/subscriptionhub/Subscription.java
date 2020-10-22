@@ -39,6 +39,9 @@ public class Subscription {
     @Valid
     private SubscriptionOptions options;
 
+    @ManyToOne
+    private User user;
+
     @PrePersist
     void createdAt() {
         this.createdAt = LocalDateTime.now();

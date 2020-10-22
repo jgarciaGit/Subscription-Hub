@@ -1,6 +1,7 @@
 package subscriptionhub.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -12,6 +13,7 @@ import subscriptionhub.Subscription;
 import subscriptionhub.SubscriptionOptions;
 import subscriptionhub.SubscriptionOptions.BillingCycle;
 import subscriptionhub.SubscriptionOptions.MediaType;
+import subscriptionhub.User;
 import subscriptionhub.data.SubscriptionOptionsRepository;
 import subscriptionhub.data.SubscriptionRepository;
 
@@ -37,14 +39,14 @@ public class AddController {
     }
 
     @PostMapping
-    public String processAdd(@Valid @ModelAttribute("subscription") Subscription subscription, Errors errors) {
+    public String processAdd(@Valid @ModelAttribute("subscription") Subscription subscription, Errors errors, @AuthenticationPrincipal User user) {
         if (errors.hasErrors())
             return "add";
 
-
+        subscription.setUser(user);
         optionsRepo.save(subscription.getOptions());
         subscriptionRepo.save(subscription);
-        return "redirect:/success";
+        return "redirect:/mysubscriptions";
     }
 
     @ModelAttribute
