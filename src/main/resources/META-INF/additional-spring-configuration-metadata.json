@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "my.subscriptions.pageSize",
+      "type": "java.lang.Integer",
+      "description": "Sets the maximum number of subscriptions to display in a list."
+  }
+] }
