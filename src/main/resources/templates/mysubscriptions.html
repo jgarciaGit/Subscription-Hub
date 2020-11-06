@@ -5,72 +5,99 @@
 <head>
     <meta charset="UTF-8">
     <title>My Subscriptions</title>
-    <link th:href="@{homeStyles.css}" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link th:href="@{styles.css}" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
     <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
 </head>
 <body class="gradient">
-<div id="page-container">
+    <div id="page-container">
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-<header>
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+                <a class="navbar-brand"><img th:src="@{/images/main-logo-md.png}"></a>
 
-        <a class="navbar-brand"><img th:src="@{/images/mainLogo-md.png}"></a>
+                <button class="navbar-toggler" type="button"
+                        data-toggle="collapse"
+                        data-target="#navbarSupportedContent"
+                        aria-controls="#navbarSupportedContent"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">My Subscriptions</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{add}">Add</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Delete</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Manage Accounts</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Notifications</a>
-            </li>
-        </ul>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item" th:classappend="${#request.getServletPath() == '/' ? 'active' : ''}"
+                            th:if="${#authentication.getName().equals('anonymousUser')}">
+                            <a class="nav-link" th:href="@{/}">Home</a>
+                        </li>
+                        <li class="nav-item" th:classappend="${#request.getServletPath() == '/mysubscriptions' ? 'active' : ''}"
+                            th:if="${!#authentication.getName().equals('anonymousUser')}">
+                            <a class="nav-link" th:href="@{/mysubscriptions}">My Subscriptions</a>
+                        </li>
+                        <li class="nav-item" th:classappend="${#request.getServletPath() == '/add' ? 'active' : ''}"
+                            th:if="${!#authentication.getName().equals('anonymousUser')}">
+                            <a class="nav-link" th:href="@{/add}">Add</a>
+                        </li>
+                    </ul>
 
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Profile</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/}">Sign Out</a>
-            </li>
-        </ul>
-    </nav>
-</header>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item" th:classappend="${#request.getServletPath() == '/register' ? 'active' : ''}"
+                            th:if="${#authentication.getName().equals('anonymousUser')}">
+                            <a class="nav-link" th:href="@{/register}">Sign Up</a>
+                        </li>
+                        <li class="nav-item" th:classappend="${#request.getServletPath() == '/login' ? 'active' : ''}"
+                            th:if="${#authentication.getName().equals('anonymousUser')}">
+                            <a class="nav-link" th:href="@{/login}">Login</a>
+                        </li>
+                        <li class="nav-item" th:if="${!#authentication.getName().equals('anonymousUser')}">
+                            <a class="nav-link" th:href="@{/logout}">Sign Out</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
 
-    <div id="content-wrap">
+        <div id="content-wrap">
 
-    <p class="greeting">Hi, <span th:text="${fullname}">Full name</span></p>
-    <h1 class="msHead">Current Subscriptions</h1>
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <h1 class="col-4 msGreet">Hi, <span th:text="${fullname}">Full name</span></h1>
+                </div>
 
-    <div class="content">
-    <div th:each="subscription : ${subscriptions}">
-        <div class="subBox left">
-            <h3 class="subName" th:text="${subscription.name}">NAME</h3>
-            <hr class="hrs">
-            <p>Cost: $<span class="subSpan" th:text="${subscription.cost}">Cost</span></p>
-            <p>Start Date: <span class="subSpan" th:text="${subscription.start}">START DATE</span></p>
-            <p>End Date: <span class="subSpan" th:text="${subscription.end}">END DATE</span></p>
-            <p>Billing Cycle: <span class="subSpan" th:text="${subscription.options.billingCycle}"> </span></p>
-            <p>Media Type: <span class="subSpan" th:text="${subscription.options.mediaType}"> </span></p>
+                <div class="row justify-content-center">
+                    <h1 class="col-5 msHead">Current Subscriptions</h1>
+                </div>
+            </div>
+
+
+
+        <div class="sub-content">
+            <div th:each="subscription : ${subscriptions}" class="subs float-lg-left">
+                <div class="subBox">
+                    <p class="subSpan" th:text="${subscription.name}">NAME</p>
+                    <hr class="hrs">
+
+                    <p>Cost: $<span class="subSpan" th:text="${subscription.cost}">Cost</span></p>
+                    <p>Start Date: <span class="subSpan" th:text="${subscription.start}">START DATE</span></p>
+                    <p>End Date: <span class="subSpan" th:text="${subscription.end}">END DATE</span></p>
+                    <p>Billing Cycle: <span class="subSpan" th:text="${subscription.options.billingCycle}"> </span></p>
+                    <p>Media Type: <span class="subSpan" th:text="${subscription.options.mediaType}"> </span></p>
+                </div>
+            </div>
+
         </div>
-    </div>
+        </div>
+
+        <footer class="bttm">
+            Copyright &copy;2020 <br/>
+            Jorge Garcia <br/>
+            CS-321-1
+        </footer>
     </div>
 
-    </div>
-<footer class="bttm">
-    Copyright &copy;2020 <br/>
-    Jorge Garcia <br/>
-    CS-321-1
-</footer>
-</div>
+    <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/1.16.0/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
 </body>
 </html>

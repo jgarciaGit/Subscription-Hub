@@ -5,127 +5,144 @@
 <head>
     <meta charset="UTF-8">
     <title>Add</title>
-    <link th:href="@{homeStyles.css}" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link th:href="@{styles.css}" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
     <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
 </head>
 <body class="gradient">
-<div id="page-container">
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div id="page-container">
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-            <a class="navbar-brand"><img th:src="@{/images/mainLogo-md.png}"></a>
+                <span class="navbar-brand"><img th:src="@{images/main-logo-md.png}"></span>
 
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{mysubscriptions}">My Subscriptions</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" th:href="@{add}">Add</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Delete</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Manage Accounts</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Notifications</a>
-                </li>
-            </ul>
+                <button class="navbar-toggler" type="button"
+                        data-toggle="collapse"
+                        data-target="#navbarSupportedContent"
+                        aria-controls="#navbarSupportedContent"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/}">Sign Out</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
-<div id="content-wrap">
-        <form class="col-sm-5 addForm" method="post" th:object="${subscription}">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item" th:classappend="${#request.getServletPath() == '/' ? 'active' : ''}"
+                            th:if="${#authentication.getName().equals('anonymousUser')}">
+                            <a class="nav-link" th:href="@{/}">Home</a>
+                        </li>
+                        <li class="nav-item" th:classappend="${#request.getServletPath() == '/mysubscriptions' ? 'active' : ''}"
+                            th:if="${!#authentication.getName().equals('anonymousUser')}">
+                            <a class="nav-link" th:href="@{/mysubscriptions}">My Subscriptions</a>
+                        </li>
+                        <li class="nav-item" th:classappend="${#request.getServletPath() == '/add' ? 'active' : ''}"
+                            th:if="${!#authentication.getName().equals('anonymousUser')}">
+                            <a class="nav-link" th:href="@{/add}">Add</a>
+                        </li>
+                    </ul>
 
-            <h1 class="addHead">Add a subscription</h1>
-
-            <p class="validationError error"
-                  th:if="${#fields.hasErrors('name')}"
-                  th:errors="*{name}">Name Error</p>
-            <div class="form-group row">
-                <label class="col-sm-6 col-form-label">Name of subscription:</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" placeholder="Enter name..." th:field="*{name}">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item" th:classappend="${#request.getServletPath() == '/register' ? 'active' : ''}"
+                            th:if="${#authentication.getName().equals('anonymousUser')}">
+                            <a class="nav-link" th:href="@{/register}">Sign Up</a>
+                        </li>
+                        <li class="nav-item" th:classappend="${#request.getServletPath() == '/login' ? 'active' : ''}"
+                            th:if="${#authentication.getName().equals('anonymousUser')}">
+                            <a class="nav-link" th:href="@{/login}">Login</a>
+                        </li>
+                        <li class="nav-item" th:if="${!#authentication.getName().equals('anonymousUser')}">
+                            <a class="nav-link" th:href="@{/logout}">Sign Out</a>
+                        </li>
+                    </ul>
                 </div>
-            </div>
+            </nav>
+        </header>
 
-            <p class="validationError error"
-                  th:if="${#fields.hasErrors('cost')}"
-                  th:errors="*{cost}">Cost Error</p>
-            <div class="form-group row">
-                <label class="col-sm-6 col-form-label">Cost of subscription:</label>
-                <div class="col-sm-6">
-                    <input type="number" class="form-control" placeholder="Enter cost..." th:step="0.01" th:field="*{cost}">
-                </div>
-            </div>
+        <h1 class="addHead">Add a subscription</h1>
 
-            <p class="validationError error"
-                  th:if="${#fields.hasErrors('start')}"
-                  th:errors="*{start}">Date Error</p>
-            <div class="form-group row">
-                <label class="col-sm-6 col-form-label">Current billing cycle start date:</label>
-                <div class="col-sm-6">
-                    <input type="date" class="form-control" th:field="*{start}">
-                </div>
-            </div>
+        <div id="content-wrap">
+                <form class="container-fluid" method="post" th:object="${subscription}" id="addForm">
 
-            <p class="validationError error"
-                  th:if="${#fields.hasErrors('end')}"
-                  th:errors="*{end}">Date Error</p>
-            <div class="form-group row">
-                <label class="col-sm-6 col-form-label">Current billing cycle end date:</label>
-                <div class="col-sm-6">
-                <input type="date" class="form-control" th:max="2021-12-31" th:min="2019-9-15" th:field="*{end}">
-                </div>
-            </div>
+                    <div class="form-group row justify-content-center">
+                        <p class="col-6 text-center validationError error"
+                              th:if="${#fields.hasErrors('name')}"
+                              th:errors="*{name}">Name Error</p>
+                    </div>
+                    <div class="form-group row justify-content-center">
+                        <label class="col-form-label col-3 col-lg-2 text-right font-weight-bold">Name of subscription:</label>
+                        <input type="text" class="form-control col-5 col-lg-2" placeholder="Enter name..." th:field="*{name}">
+                    </div>
 
-            <p class="validationError error"
-                  th:if="${#fields.hasErrors('options.billingCycle')}"
-                  th:errors="*{options.billingCycle}">Cycle Error</p>
-            <div class="form-group row">
-                <label class="col-sm-6 col-form-label">Select Billing Cycle:</label>
-                <div class="col-sm-6">
-                    <select  class="form-control" th:field="*{options.billingCycle}">
-                        <option th:each="cycle : ${billingCycle}" th:value="${cycle}" th:text="${cycle}">
-                        </option>
-                    </select>
-                </div>
-            </div>
+                    <div class="form-group row justify-content-center">
+                        <p class="col-6 text-center validationError error"
+                              th:if="${#fields.hasErrors('cost')}"
+                              th:errors="*{cost}">Cost Error</p>
+                    </div>
+                    <div class="form-group row justify-content-center">
+                        <label class="col-form-label col-3 col-lg-2 text-right font-weight-bold">Cost of subscription:</label>
+                        <input type="number" class="form-control col-5 col-lg-2" placeholder="Enter cost..." th:step="0.01" th:field="*{cost}">
+                    </div>
 
-            <p class="validationError error"
-                  th:if="${#fields.hasErrors('options.mediaType')}"
-                  th:errors="*{options.mediaType}">Media Error</p>
-            <div class="form-group row">
-                <label class="col-sm-6 col-form-label">Select Media Type:</label>
-                <div class="col-sm-6">
-                    <select class="form-control" th:field="*{options.mediaType}">
-                        <option th:each="type : ${mediaTypes}" th:value="${type}" th:text="${type}">
-                        </option>
-                    </select>
-                </div>
-            </div>
+                    <div class="form-group row justify-content-center">
+                        <p class="col-6 text-center validationError error"
+                              th:if="${#fields.hasErrors('start')}"
+                              th:errors="*{start}">Date Error</p>
+                    </div>
+                    <div class="form-group row justify-content-center">
+                        <label class="col-form-label col-3 col-lg-2 text-right font-weight-bold">Billing cycle start date:</label>
+                        <input type="date" class="form-control col-5 col-lg-2" th:field="*{start}">
+                    </div>
 
-            <div class="form-group row addSubBtn col-sm-3">
-                <button type="submit" class="btn btn-dark col-sm-12">Submit</button>
-            </div>
-        </form>
-</div>
+                    <div class="form-group row justify-content-center">
+                        <p class="col-6 text-center validationError error"
+                              th:if="${#fields.hasErrors('end')}"
+                              th:errors="*{end}">Date Error</p>
+                    </div>
+                    <div class="form-group row justify-content-center">
+                        <label class="col-form-label col-3 col-lg-2 text-right font-weight-bold">Billing cycle end date:</label>
+                        <input type="date" class="form-control col-5 col-lg-2" th:max="2021-12-31" th:min="2019-9-15" th:field="*{end}">
+                    </div>
 
-    <footer class="bttm">
-        Copyright &copy;2020 <br/>
-        Jorge Garcia <br/>
-        CS-321-1
-    </footer>
-</div>
+                    <div class="form-group row justify-content-center">
+                        <p class="col-6 text-center validationError error"
+                              th:if="${#fields.hasErrors('options.billingCycle')}"
+                              th:errors="*{options.billingCycle}">Cycle Error</p>
+                    </div>
+                    <div class="form-group row justify-content-center">
+                        <label class="col-form-label col-3 col-lg-2 text-right font-weight-bold">Select Billing Cycle:</label>
+                        <select  class="form-control col-5 col-lg-2" th:field="*{options.billingCycle}">
+                            <option th:each="cycle : ${billingCycle}" th:value="${cycle}" th:text="${cycle}">--Select--</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group row justify-content-center">
+                        <p class="validationError error"
+                              th:if="${#fields.hasErrors('options.mediaType')}"
+                              th:errors="*{options.mediaType}">Media Error</p>
+                    </div>
+                    <div class="form-group row justify-content-center">
+                        <label class="col-form-label col-3 col-lg-2 text-right font-weight-bold">Select Media Type:</label>
+                        <select class="form-control col-5 col-lg-2" th:field="*{options.mediaType}">
+                            <option th:each="type : ${mediaTypes}" th:value="${type}" th:text="${type}">--Select--</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group row justify-content-center">
+                        <span class="col-7 col-lg-3"></span>
+                        <input type="submit" class="btn btn-dark col-1 form-control" value="Submit">
+                    </div>
+                </form>
+        </div>
+
+        <footer class="bttm">
+            Copyright &copy;2020 <br/>
+            Jorge Garcia <br/>
+            CS-321-1
+        </footer>
+
+        <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+        <script th:src="@{/webjars/popper.js/1.16.0/umd/popper.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
+    </div>
 </body>
 </html>

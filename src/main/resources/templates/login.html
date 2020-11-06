@@ -5,85 +5,102 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" th:href="@{/homeStyles.css}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/styles.css}">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
     <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
 </head>
 <body class="gradient">
-<div id="page-container">
-<header>
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div id="page-container">
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-        <a class="navbar-brand"><img th:src="@{images/mainLogo-md.png}"></a>
+                <a class="navbar-brand"><img th:src="@{images/main-logo-md.png}"></a>
 
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link home-nav" th:href="@{/}">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link home-nav" href="#">About</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link home-nav" href="#">Contact</a>
-            </li>
-        </ul>
+                <button class="navbar-toggler" type="button"
+                        data-toggle="collapse"
+                        data-target="#navbarSupportedContent"
+                        aria-controls="#navbarSupportedContent"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link home-nav" th:href="@{/register}">Sign Up</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link home-nav active" th:href="@{/login}">Login</a>
-            </li>
-        </ul>
-    </nav>
-</header>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item" th:classappend="${#request.getServletPath() == '/' ? 'active' : ''}"
+                            th:if="${#authentication.getName().equals('anonymousUser')}">
+                            <a class="nav-link" th:href="@{/}">Home</a>
+                        </li>
+                        <li class="nav-item" th:classappend="${#request.getServletPath() == '/mysubscriptions' ? 'active' : ''}"
+                            th:if="${!#authentication.getName().equals('anonymousUser')}">
+                            <a class="nav-link" th:href="@{/mysubscriptions}">My Subscriptions</a>
+                        </li>
+                        <li class="nav-item" th:classappend="${#request.getServletPath() == '/add' ? 'active' : ''}"
+                            th:if="${!#authentication.getName().equals('anonymousUser')}">
+                            <a class="nav-link" th:href="@{/add}">Add</a>
+                        </li>
+                    </ul>
 
-    <div id="content-wrap">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item" th:classappend="${#request.getServletPath() == '/register' ? 'active' : ''}"
+                            th:if="${#authentication.getName().equals('anonymousUser')}">
+                            <a class="nav-link" th:href="@{/register}">Sign Up</a>
+                        </li>
+                        <li class="nav-item" th:classappend="${#request.getServletPath() == '/login' ? 'active' : ''}"
+                            th:if="${#authentication.getName().equals('anonymousUser')}">
+                            <a class="nav-link" th:href="@{/login}">Login</a>
+                        </li>
+                        <li class="nav-item" th:if="${!#authentication.getName().equals('anonymousUser')}">
+                            <a class="nav-link" th:href="@{/logout}">Sign Out</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
 
-    <div class="log_icons">
-        <img th:src="@{/images/Netflix_icon.png}" class="subIcons">
-        <img th:src="@{/images/Hulu_icon.png}" class="subIcons">
-        <img th:src="@{/images/Spotify_icon.png}" class="subIcons">
-        <img th:src="@{/images/Disney_icon.png}" class="subIcons_last">
+        <div id="content-wrap" class="container-fluid">
+
+            <div class="main_row row justify-content-center">
+                <img th:src="@{/images/icon-netflix.png}" class="col-2 col-lg-1 mr-5">
+                <img th:src="@{/images/icon-hulu.png}" class="col-2 col-lg-1 mr-5">
+                <img th:src="@{/images/icon-spotify.png}" class="col-2 col-lg-1 mr-5">
+                <img th:src="@{/images/icon-disneyplus.png}" class="col-2 col-lg-1">
+            </div>
+
+            <h1 class="loginHead">Login</h1>
+
+            <form class="container-fluid" method="post" th:action="@{/login}" id="loginForm">
+                <div th:if="${param.error}" class="error row justify-content-center">
+                    <p class="col-6 text-center">*Unable to login. Check your username and password*</p>
+                </div>
+
+                <div class="row form-group justify-content-center">
+                    <label class="col-form-label col-2 text-right font-weight-bold" for="username">Username: </label>
+                    <input class="form-control col-5 col-lg-2" type="text" th:name="username" id="username">
+                </div>
+
+                <div class="row form-group justify-content-center">
+                    <label class="col-form-label col-2 text-right font-weight-bold" for="password">Password: </label>
+                    <input class="form-control col-5 col-lg-2" type="password" th:name="password" id="password">
+                </div>
+                <div class="row form-group justify-content-center">
+                    <span class="col-6 col-lg-3"></span>
+                    <input class="col-1 form-control btn btn-dark" type="submit" value="Login">
+                </div>
+            </form>
+
+        </div>
+
+        <footer class="bttm">
+            Copyright &copy;2020 <br/>
+            Jorge Garcia <br/>
+            CS-321-1
+        </footer>
     </div>
 
+    <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/1.16.0/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
 
-    <form class="col-sm-3 loginForm" method="post" th:action="@{/login}">
-        <h1 class="loginHead">Login</h1>
-
-        <p class="col-sm-12">New here? Click <a th:href="@{/register}">here</a> to register.</p>
-
-        <div th:if="${param.error}" class="error">
-            *Unable to login. Check your username and password*
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-3" for="username">Username: </label>
-            <div class="col-sm-9">
-                <input type="text" th:name="username" id="username">
-            </div>
-        </div>
-
-        <div class="form-group row">
-        <label class="col-sm-3" for="password">Password: </label>
-            <div class="col-sm-9">
-        <input type="password" th:name="password" id="password">
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-sm-4">
-                <input type="submit" class="btn btn-dark" value="Login">
-            </div>
-        </div>
-
-    </form>
-    </div>
-<footer class="bttm">
-    Copyright &copy;2020 <br/>
-    Jorge Garcia <br/>
-    CS-321-1
-</footer>
-</div>
 </body>
 </html>

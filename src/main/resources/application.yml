@@ -16,4 +16,4 @@ spring:
 
 my:
   subscriptions:
-    pageSize: 3
+    pageSize: 6
