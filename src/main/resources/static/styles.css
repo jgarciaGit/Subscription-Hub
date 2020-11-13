@@ -38,6 +38,7 @@
 }
 
 h1 {
+    font-family: "Poiret One", sans-serif !important;
     text-align: center;
 }
 
@@ -46,13 +47,25 @@ h1 {
     font-size: 28px;
 }
 
-.regHead, .loginHead, .addHead, .msGreet{
+.regHead, .loginHead, .addHead, .msGreet, .successHead, .errorHead{
     margin-top: 50px;
     margin-bottom: 25px;
     font-weight: bold;
     font-family: "Poiret One", sans-serif !important;
 }
+.errorHead, .homeLink, .errorPar, .genError {
+    font-family: 'VT323', monospace !important;
+    color: black;
+}
 
+.homeLink:hover {
+    text-decoration: none;
+    color: #343a40;
+}
+.errorHead {
+    background-color: #d0d0d0;
+    padding: 0 10px;
+}
 .msHead {
     margin-bottom: 100px;
     font-family: "Poiret One", sans-serif !important;
@@ -121,6 +134,10 @@ footer {
         width: 60%;
         margin: 50px auto 10px;
     }
+    .errorHead, .homeLink, .errorPar {
+        font-size: 48px;
+    }
+
 }
 
 
@@ -145,5 +162,8 @@ footer {
     .subs {
         width: 25%;
         margin: 6px 4.16% 30px;
+    }
+    .errorHead, .homeLink, .errorPar {
+        font-size: 36px;
     }
 }

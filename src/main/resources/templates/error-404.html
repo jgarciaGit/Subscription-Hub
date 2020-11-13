@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:th="http://www.thymeleaf.org">
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="fragments/base :: headContent">
-    <title class="pageTitle">Home</title>
+    <title class="pageTitle">Error-404</title>
 </head>
 
 <body class="gradient">
@@ -22,20 +22,14 @@
 
             </div>
 
-            <div class="main_row row justify-content-center">
-                <p class="main_par">All Your Subscriptions.<br>
-                    All in One Place.</p>
+            <div class="row justify-content-center">
+                <h1 class="errorHead">Error 404</h1>
             </div>
-
-            <div class="main_row main_reward row justify-content-center">
-                <p class="col-12">
-                   #1 Highest Rated on G2<br>
-                   <img class="reward col-6 col-lg-2" th:src="@{/images/icon-reward.svg}">
-                </p>
+            <div class="row justify-content-center">
+                <p class="errorPar"> Page Not Found.</p>
             </div>
 
         </div>
-
 
         <div th:replace="fragments/base :: footerContent">
 

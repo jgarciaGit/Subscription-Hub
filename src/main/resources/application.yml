@@ -17,3 +17,10 @@ spring:
 my:
   subscriptions:
     pageSize: 6
+
+server:
+  error:
+    whitelabel:
+      enabled: false
+    path: /error
+  port: 8080
