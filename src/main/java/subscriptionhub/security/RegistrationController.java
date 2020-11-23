@@ -47,7 +47,6 @@ public class RegistrationController {
             userRepo.save(registrationForm.toUser(passwordEncoder));
         } catch (DataIntegrityViolationException e) {
             errors.rejectValue("username", "invalidUsername", "Username not available. Please choose another username.");
-//            errors.rejectValue("email", "invalidEmail", "Email already registered");
             return "registration";
         }
         return "redirect:/login";

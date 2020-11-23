@@ -44,7 +44,6 @@ public class AddController {
             return "add";
 
         subscription.setUser(user);
-        optionsRepo.save(subscription.getOptions());
         subscriptionRepo.save(subscription);
         return "redirect:/mysubscriptions";
     }

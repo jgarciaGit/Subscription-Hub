@@ -67,12 +67,11 @@ h1 {
     padding: 0 10px;
 }
 .msHead {
-    margin-bottom: 100px;
     font-family: "Poiret One", sans-serif !important;
     font-weight: bold;
 }
 
-#loginForm, #regForm, #addForm {
+#loginForm, #regForm, #addForm, #editForm {
     margin-bottom: 100px;
 }
 
@@ -81,21 +80,23 @@ h1 {
     margin-bottom: 0.5rem !important;
 }
 
+.sub-bar {
+    margin-top: 50px;
+}
+.sub-collapse {
+    padding: 20px 0;
+    background-color: #fff;
+}
+.sub-ftr {
+    margin-top: 50px;
+}
 .sub-content {
-    overflow: auto;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
 }
-
-.subBox {
-    color: black;
-    font-family: "Poiret One", sans-serif !important;
-    border-radius: 50px;
-    text-align: center;
+.confirmPar {
+    font-size: 32px;
+    font-family: "Poiret One", sans-serif;
     font-weight: bold;
-}
-.hrs {
-    border: 1px solid beige;
-    background-color: beige;
 }
 .subSpan {
     font-weight: bold;
@@ -118,22 +119,12 @@ footer {
 
 
 @media (min-width: 576px) {
-    .subBox {
-        font-size: 24px;
-        transition: none;
+
+    .btn-delete, .btn-edit, .btn-sub {
+        font-family: "Poiret One", sans-serif;
+        font-size: 42px !important;
     }
 
-    .subBox:hover {
-        transform: none;
-    }
-
-    .msHead {
-        margin-bottom: 25px;
-    }
-    .subs {
-        width: 60%;
-        margin: 50px auto 10px;
-    }
     .errorHead, .homeLink, .errorPar {
         font-size: 48px;
     }
@@ -142,27 +133,16 @@ footer {
 
 
 @media (min-width: 992px) {
-    .subBox {
-        transition: transform .2s;
-        padding: 10px 0;
-    }
 
-    .subBox:hover {
-        transform: translateY(-5px);
+    .btn-delete, .btn-edit, .btn-sub {
+        font-family: "Poiret One", sans-serif;
+        font-size: 60px !important;
     }
 
     .main_reward {
         font-size: 32px;
     }
 
-    .msHead {
-        margin-bottom: 50px;
-    }
-
-    .subs {
-        width: 25%;
-        margin: 6px 4.16% 30px;
-    }
     .errorHead, .homeLink, .errorPar {
         font-size: 36px;
     }

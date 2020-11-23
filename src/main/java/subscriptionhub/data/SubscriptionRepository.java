@@ -10,4 +10,6 @@ import java.util.List;
 public interface SubscriptionRepository extends CrudRepository<Subscription, Long> {
 
     public List<Subscription> findByUser(User user, Pageable pageable);
+
+    public void deleteById(Long id);
 }

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base :: headContent">
+    <title class="pageTitle">Confirm Deletion</title>
+</head>
+<body class="gradient">
+    <div id="page-container">
+        <header>
+            <div th:replace="fragments/base :: navigation">
+
+            </div>
+        </header>
+
+        <div id="content-wrap">
+            <div class="container-fluid">
+
+                <div class="row justify-content-center">
+                    <p class="col-lg-6 col-8 mt-5 confirmPar">Are you sure you want to delete <span style="text-decoration: underline" th:text="${subscription.name}"></span> from your subscriptions?</p>
+                </div>
+
+
+                <form th:action="@{/delete/confirmed/{subId}(subId=${subscription.id})}" method="post" class="row justify-content-center mt-3">
+                    <a th:href="@{/mysubscriptions}" class="btn btn-danger col-lg-1 col-2 mr-5 ">No</a>
+                    <input class="btn btn-success col-lg-1 col-2" type="submit" value="Yes">
+                </form>
+
+            </div>
+        </div>
+
+        <div th:replace="fragments/base :: footerContent">
+
+        </div>
+    </div>
+</body>
+<th:block th:insert="fragments/base :: scripts"></th:block>
+</html>

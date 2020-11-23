@@ -3,7 +3,7 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/base :: headContent">
-    <title class="pageTitle">Home</title>
+    <title class="pageTitle">My Subscriptions</title>
 </head>
 <body class="gradient">
     <div id="page-container">
@@ -25,32 +25,32 @@
                 </div>
             </div>
 
-
-
-        <div class="sub-content">
-            <div th:each="subscription : ${subscriptions}" class="subs float-lg-left">
-                <div class="subBox">
-                    <p class="subSpan" th:text="${subscription.name}">NAME</p>
-                    <hr class="hrs">
-
-                    <p>Cost: $<span class="subSpan" th:text="${subscription.cost}">Cost</span></p>
-                    <p>Start Date: <span class="subSpan" th:text="${subscription.start}">START DATE</span></p>
-                    <p>End Date: <span class="subSpan" th:text="${subscription.end}">END DATE</span></p>
-                    <p>Billing Cycle: <span class="subSpan" th:text="${subscription.options.billingCycle}"> </span></p>
-                    <p>Media Type: <span class="subSpan" th:text="${subscription.options.mediaType}"> </span></p>
+            <div class="sub-content">
+                <div th:each="subscription : ${subscriptions}" class="subs">
+                    <div class="container-fluid">
+                        <div class="row justify-content-around sub-bar">
+                            <a th:href="@{/modify/{subId}(subId=${subscription.id})}" class="btn btn-dark btn-edit col-2">Edit</a>
+                            <button type="button" class="btn btn-dark btn-sub col-5 sub-toggle" data-toggle="collapse" th:attr="data-target='#details'+${subscription.id}"  th:text="${subscription.name}">NAME</button>
+                            <a th:href="@{/delete/confirmation/{subId}(subId=${subscription.id})}" class="btn btn-dark btn-delete col-2">Delete</a>
+                        </div>
+                        <div class="row justify-content-center text-center sub-info">
+                            <div th:id="'details'+${subscription.id}" class="collapse sub-collapse col-5">
+                                <p>Cost: $<span class="subSpan" th:text="${subscription.cost}">Cost</span></p>
+                                <p>Start Date: <span class="subSpan" th:text="${subscription.start}">START DATE</span></p>
+                                <p>End Date: <span class="subSpan" th:text="${subscription.end}">END DATE</span></p>
+                                <p>Billing Cycle: <span class="subSpan" th:text="${subscription.options.billingCycle}"> </span></p>
+                                <p>Type: <span class="subSpan" th:text="${subscription.options.mediaType}"> </span></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-        </div>
         </div>
 
         <div th:replace="fragments/base :: footerContent">
 
         </div>
     </div>
-
-    <div th:replace="fragments/base :: scripts">
-
-    </div>
 </body>
+<th:block th:insert="fragments/base :: scripts"></th:block>
 </html>

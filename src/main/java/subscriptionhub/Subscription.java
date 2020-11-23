@@ -35,7 +35,7 @@ public class Subscription {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate end;
 
-    @OneToOne(targetEntity = SubscriptionOptions.class)
+    @OneToOne(targetEntity = SubscriptionOptions.class, cascade = CascadeType.ALL)
     @Valid
     private SubscriptionOptions options;
 

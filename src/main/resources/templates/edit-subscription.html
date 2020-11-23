@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base :: headContent">
+    <title class="pageTitle">Edit</title>
+</head>
+<body class="gradient">
+<div id="page-container">
+    <header>
+        <div th:replace="fragments/base :: navigation">
+
+        </div>
+    </header>
+
+    <h1 class="addHead">Edit subscription</h1>
+
+    <div id="content-wrap">
+        <form class="container-fluid" method="post" th:action="@{/modify/update/{subId}/{optId}(subId=${subscription.id}, optId=${subscription.getOptions().getId()})}" th:object="${subscription}" id="editForm">
+
+            <div class="form-group row justify-content-center">
+                <p class="col-6 text-center validationError error"
+                   th:if="${#fields.hasErrors('name')}"
+                   th:errors="*{name}">Name Error</p>
+            </div>
+            <div class="form-group row justify-content-center">
+                <label class="col-form-label col-3 col-lg-2 text-right font-weight-bold">Name of subscription:</label>
+                <input type="text" class="form-control col-5 col-lg-2" placeholder="Enter name..." th:field="*{name}">
+            </div>
+
+            <div class="form-group row justify-content-center">
+                <p class="col-6 text-center validationError error"
+                   th:if="${#fields.hasErrors('cost')}"
+                   th:errors="*{cost}">Cost Error</p>
+            </div>
+            <div class="form-group row justify-content-center">
+                <label class="col-form-label col-3 col-lg-2 text-right font-weight-bold">Cost of subscription:</label>
+                <input type="number" class="form-control col-5 col-lg-2" placeholder="Enter cost..." th:step="0.01" th:field="*{cost}">
+            </div>
+
+            <div class="form-group row justify-content-center">
+                <p class="col-6 text-center validationError error"
+                   th:if="${#fields.hasErrors('start')}"
+                   th:errors="*{start}">Date Error</p>
+            </div>
+            <div class="form-group row justify-content-center">
+                <label class="col-form-label col-3 col-lg-2 text-right font-weight-bold">Billing cycle start date:</label>
+                <input type="date" class="form-control col-5 col-lg-2" th:field="*{start}">
+            </div>
+
+            <div class="form-group row justify-content-center">
+                <p class="col-6 text-center validationError error"
+                   th:if="${#fields.hasErrors('end')}"
+                   th:errors="*{end}">Date Error</p>
+            </div>
+            <div class="form-group row justify-content-center">
+                <label class="col-form-label col-3 col-lg-2 text-right font-weight-bold">Billing cycle end date:</label>
+                <input type="date" class="form-control col-5 col-lg-2" th:max="2021-12-31" th:min="2019-9-15" th:field="*{end}">
+            </div>
+
+            <div class="form-group row justify-content-center">
+                <p class="col-6 text-center validationError error"
+                   th:if="${#fields.hasErrors('options.billingCycle')}"
+                   th:errors="*{options.billingCycle}">Cycle Error</p>
+            </div>
+            <div class="form-group row justify-content-center">
+                <label class="col-form-label col-3 col-lg-2 text-right font-weight-bold">Select Billing Cycle:</label>
+                <select  class="form-control col-5 col-lg-2" th:field="*{options.billingCycle}">
+                    <option th:each="cycle : ${billingCycle}" th:value="${cycle}" th:text="${cycle}">--Select--</option>
+                </select>
+            </div>
+
+            <div class="form-group row justify-content-center">
+                <p class="validationError error"
+                   th:if="${#fields.hasErrors('options.mediaType')}"
+                   th:errors="*{options.mediaType}">Media Error</p>
+            </div>
+            <div class="form-group row justify-content-center">
+                <label class="col-form-label col-3 col-lg-2 text-right font-weight-bold">Select Type:</label>
+                <select class="form-control col-5 col-lg-2" th:field="*{options.mediaType}">
+                    <option th:each="type : ${mediaTypes}" th:value="${type}" th:text="${type}">--Select--</option>
+                </select>
+            </div>
+
+            <div class="form-group row justify-content-center">
+                <span class="col-6 col-lg-2"></span>
+                <a th:href="@{/mysubscriptions}" class="btn btn-dark col-1 form-control">Cancel</a>
+                <input type="submit" class="btn btn-dark col-1 form-control ml-3 mr-3" value="Submit">
+            </div>
+        </form>
+    </div>
+
+    <div th:replace="fragments/base :: footerContent">
+
+    </div>
+</div>
+</body>
+<th:block th:insert="fragments/base :: scripts"></th:block>
+</html>
