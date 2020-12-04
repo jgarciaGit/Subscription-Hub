@@ -5,7 +5,7 @@ spring:
       ddl-auto: create
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MYSQL5Dialect
+        dialect: org.hibernate.dialect.MySQL5Dialect
 
   datasource:
     url: ${CLEARDB_DATABASE_URL}
