@@ -41,6 +41,10 @@
                 th:if="${!#authentication.getName().equals('anonymousUser')}">
                 <a class="nav-link" th:href="@{/add}">Add</a>
             </li>
+            <li class="nav-item" th:classappend="${#request.getServletPath() == '/suggestions' ? 'active' : ''}"
+                th:if="${!#authentication.getName().equals('anonymousUser')}">
+                <a class="nav-link" th:href="@{/suggestions}">Suggestions</a>
+            </li>
         </ul>
 
         <ul class="navbar-nav ml-auto">
@@ -51,6 +55,9 @@
             <li class="nav-item" th:classappend="${#request.getServletPath() == '/login' ? 'active' : ''}"
                 th:if="${#authentication.getName().equals('anonymousUser')}">
                 <a class="nav-link" th:href="@{/login}">Login</a>
+            </li>
+            <li class="nav-item" th:if="${!#authentication.getName().equals('anonymousUser')}">
+                <a class="nav-link" th:href="@{/profile}">Profile</a>
             </li>
             <li class="nav-item" th:if="${!#authentication.getName().equals('anonymousUser')}">
                 <a class="nav-link" th:href="@{/logout}">Sign Out</a>
@@ -73,7 +80,8 @@
 <footer th:fragment="footerContent" class="bttm">
     Copyright &copy;2020 <br/>
     Jorge Garcia <br/>
-    CS-321-1
+    CS-321-1 <br/>
+    <span style="color: #6c747e">Disclaimer: This site contains copyrighted material. The material on this site is used for educational purposes.</span>
 </footer>
 
 <th:block th:fragment="scripts">

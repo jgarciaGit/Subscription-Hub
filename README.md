@@ -14,6 +14,16 @@ I want to build this particular application because there are so many subscripti
 
 My application will store user login information in addition to subscription information in a database. There will also be authentication for user login information. Additionally there will be security for user login information and for usernames and passwords for their subscriptions if they use that feature as well.   
 
+# Summary:
+
+During the course of the last couple of months I created a subscription manager web application. Users are able to sign up to my website and have a personalised view of all of their subscriptions. Users can add, delete, modify, and view their subscriptions conveniently in one place. Users can also change their password if they wish to do so. Included in my website is also a suggestions page where I suggest some subscription services that may interest the user. In order to create my web application I used the following frontend technologies, HTML, CSS, and Bootstrap. As for backend technologies I used Java, JPA, Spring Boot, and the Spring Framework.
+
+The purpose of the website is to help people keep track of their subscriptions all in one place. Users are able to store information of their subscriptions like the name, price, and start/end date of their subscriptions. We have all fallen victim of paying for a subscription service that we no longer use. Keeping track of all of your subscriptions is difficult and my application will help with that and prevent you from spending unnecessary money. My website is targeted to people who are adults and have purchased many subscriptions to the point where they can't keep track of them anymore.
+
+# Future Work:
+
+Since my application is a Minimum Viable Product (MVP), it still needs a couple more things to make it complete. Those things include a notification system that notifies users on their phone when one of their subscription’s billing cycle is coming to an end in order to cancel it if they wish to do so. Also instead of just subscriptions my application could also allow users to keep track of their bills as well. An additional feature that could be added is being able to sign up using their google account. A way to implement a notification system is by integrating Firebase Cloud Messaging with my Spring Boot application. Adding the option of bill management will be simple, I would do it like a did subscriptions. As for signing up with a google account I would use OAuth2 authentication.
+
 # Link to Github repo: 
 
 [My GitHub Repo](https://github.com/jgarciaGit/neiu-cs-321.git)

@@ -27,10 +27,18 @@ public class User implements UserDetails {
     @Column(unique = true)
     private final String username;
 
-    private final String password;
+    private String password;
+
     private final String fullname;
 
     private final String email;
+
+    public User(String username, String password, String fullname, String email) {
+        this.username = username;
+        this.password = password;
+        this.fullname = fullname;
+        this.email = email;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

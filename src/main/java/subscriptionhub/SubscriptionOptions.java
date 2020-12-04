@@ -34,6 +34,6 @@ public class SubscriptionOptions {
     }
 
     public static enum MediaType {
-        MAGAZINE, BOOK, TELEVISION, RADIO, MOVIE, MUSIC, GAMING, WEBSITE, PODCAST, STREAMING, BOX, SOFTWARE, ECOMMERCE, ACCESS;
+        Magazine, Music, Gaming, Streaming, Box;
     }
 }

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head th:replace="fragments/base :: headContent">
+    <title class="pageTitle">Suggestions</title>
+</head>
+<body class="gradient">
+    <div id="page-container">
+        <header>
+            <div th:replace="fragments/base :: navigation">
+
+            </div>
+        </header>
+
+        <div id="content-wrap" class="container-fluid">
+
+            <div th:replace="fragments/base :: icons">
+
+            </div>
+
+            <h1 class="suggHead">Suggestions</h1>
+
+            <div class="row justify-content-around mt-5">
+                <div class="col-4 text-center">
+                    <h2 class="suggType font-weight-bold" th:text="${mediaTypes[0]}"></h2>
+                </div>
+                <div class="col-4 text-center">
+                    <h2 class="suggType font-weight-bold" th:text="${mediaTypes[1]}"></h2>
+                </div>
+            </div>
+
+            <div class="row justify-content-around">
+                <ul class="col-4 text-center">
+                    <li class="suggName font-weight-bold" th:each="magazine,iterStat : ${magazineSubscriptions}" th:unless="${iterStat.index > 2}" th:text="*{magazine}"></li>
+                </ul>
+                <ul class="col-4 text-center">
+                    <li class="suggName font-weight-bold" th:each="music,iterStat : ${musicSubscriptions}" th:unless="${iterStat.index > 2}" th:text="*{music}"></li>
+                </ul>
+            </div>
+
+            <div class="row justify-content-around mt-5">
+                <div class="col-4 text-center">
+                    <h2 class="suggType font-weight-bold" th:text="${mediaTypes[2]}"></h2>
+                </div>
+                <div class="col-4 text-center">
+                    <h2 class="suggType font-weight-bold" th:text="${mediaTypes[3]}"></h2>
+                </div>
+            </div>
+
+            <div class="row justify-content-around">
+                <ul class="col-4 text-center">
+                    <li class="suggName font-weight-bold" th:each="game,iterStat : ${gamingSubscriptions}" th:unless="${iterStat.index > 2}" th:text="*{game}"></li>
+                </ul>
+                <ul class="col-4 text-center">
+                    <li class="suggName font-weight-bold" th:each="stream,iterStat : ${streamingSubscriptions}" th:unless="${iterStat.index > 2}" th:text="*{stream}"></li>
+                </ul>
+            </div>
+
+            <div class="row justify-content-around mt-5">
+                <div class="col-4 text-center">
+                    <h2 class="suggType font-weight-bold" th:text="${mediaTypes[4]}"></h2>
+                </div>
+                <div class="col-4 text-center">
+                </div>
+            </div>
+
+            <div class="row justify-content-around mb-5">
+                <ul class="col-4 text-center">
+                    <li class="suggName font-weight-bold" th:each="box,iterStat : ${boxSubscriptions}" th:unless="${iterStat.index > 2}" th:text="*{box}"></li>
+                </ul>
+                <div class="col-4 text-center">
+                </div>
+            </div>
+
+        </div>
+
+        <div th:replace="fragments/base :: footerContent">
+
+        </div>
+    </div>
+</body>
+<th:block th:insert="fragments/base :: scripts"></th:block>
+</html>

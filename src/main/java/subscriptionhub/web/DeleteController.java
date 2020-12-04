@@ -9,8 +9,6 @@ import subscriptionhub.Subscription;
 import subscriptionhub.data.SubscriptionOptionsRepository;
 import subscriptionhub.data.SubscriptionRepository;
 
-import javax.validation.Valid;
-
 @Slf4j
 @Controller
 @RequestMapping("/delete")
