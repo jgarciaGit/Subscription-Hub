@@ -18,7 +18,7 @@ public class SuggestionsController {
 
     @GetMapping
     public String suggestions() {
-        return "/subscription-suggestions";
+        return "subscription-suggestions";
     }
 
     @ModelAttribute
