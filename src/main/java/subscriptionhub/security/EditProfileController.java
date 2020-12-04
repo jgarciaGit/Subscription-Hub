@@ -34,7 +34,7 @@ public class EditProfileController {
         model.addAttribute("email", user.getEmail());
         model.addAttribute("id", user.getId());
 
-        return "/user-profile";
+        return "user-profile";
     }
 
     @GetMapping("/change/password")
